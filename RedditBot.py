@@ -40,7 +40,7 @@ def Downvote(targetUser):
    time.sleep(3)
    print ('\033[1;32;40m[SUCCESS] Downvoted ' + str(limit) + ' of ' + str(targetUser) + '\'s comments. \033[1;37;40m \n')
 
-print('---Reddit Login----')
+print('----Reddit Login----')
 while Login():
    break
 
