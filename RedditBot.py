@@ -1,9 +1,9 @@
 import getpass
-import praw
-import string
-import random
-import sys
 import os
+import praw
+import random
+import string
+import sys
 import time
 
 def id_generator(size = 16, chars = string.ascii_uppercase + string.digits):
