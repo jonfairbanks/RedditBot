@@ -5,7 +5,7 @@ import random
 import string
 import sys
 
-__version__ = '0.2.0'
+__version__ = '0.2.1'
 
 RED = str('\033[1;31;40m')
 GREEN = str('\033[1;32;40m')
