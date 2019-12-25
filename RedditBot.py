@@ -28,12 +28,12 @@ def get_args(argv):
         description=("Upvote or downvote a Reddit profile's comment(s)")
     )
 
-    parser.add_argument("-c", "--client-id", help="your Reddit.com app client-id", type=str)
-    parser.add_argument("-s", "--client-secret", help="your Reddit.com app client-secret", type=str)
-    parser.add_argument("-u", "--username", help="your Reddit.com account login", type=str)
-    parser.add_argument("-p", "--password", help="your Reddit.com account password (never stored)", type=str)
+    parser.add_argument("-c", "--client-id", help="your Reddit.com app client-id", type=str, required=True)
+    parser.add_argument("-s", "--client-secret", help="your Reddit.com app client-secret", type=str, required=True)
+    parser.add_argument("-u", "--username", help="your Reddit.com account login", type=str, required=True)
+    parser.add_argument("-p", "--password", help="your Reddit.com account password (never stored)", type=str, required=True)
 
-    parser.add_argument("-P", "--profile", help="a Reddit.com profile to search", type=str)
+    parser.add_argument("-P", "--profile", help="a Reddit.com profile to search", type=str, required=True)
     parser.add_argument("-l", "--limit", help="limit the number of comments (default - 25)", type=str)
 
     parser.add_argument("-up", "--upvote", help="upvote a profile's comments", action="store_true")
