@@ -4,14 +4,13 @@ import argparse
 import random
 import string
 import sys
-import time
 
 __version__ = '0.2.0'
 
 RED = str('\033[1;31;40m')
 GREEN = str('\033[1;32;40m')
 BLUE = str('\033[1;34;40m')
-GREY = str('\033[0;37;40m')
+GREY = str('\033[1;30;40m')
 RESET = str('\033[1;37;40m')
 
 def id_generator(size = 16, chars = string.ascii_uppercase + string.digits):
@@ -112,7 +111,7 @@ def main():
         print(__version__)
         sys.exit(0)
 
-    print('---RedditBot---')
+    print('---RedditBot---\n')
 
     if args.upvote or args.downvote and args.client_id and args.client_secret and args.username and args.password and args.profile:
         reddit = login(args=args)
