@@ -25,21 +25,21 @@ def get_args(argv):
         argparse.Namespace: Parsed arguments.
     """
     parser = argparse.ArgumentParser(
-        description=("Votes on a user's Reddit posts")
+        description=("Upvote or downvote a profile's Reddit comment(s)")
     )
 
-    parser.add_argument("-c", "--client-id", help="pass in client id as argument", type=str)
-    parser.add_argument("-s", "--client-secret", help="pass in client secret as argument", type=str)
-    parser.add_argument("-u", "--username", help="pass in client secret as argument", type=str)
-    parser.add_argument("-p", "--password", help="pass in client secret as argument", type=str)
+    parser.add_argument("-c", "--client-id", help="your Reddit.com app client-id", type=str)
+    parser.add_argument("-s", "--client-secret", help="your Reddit.com app client-secret", type=str)
+    parser.add_argument("-u", "--username", help="your Reddit.com account login", type=str)
+    parser.add_argument("-p", "--password", help="your Reddit.com account password (never stored)", type=str)
 
-    parser.add_argument("-P", "--profile", help="pass in profile as argument", type=str)
-    parser.add_argument("-l", "--limit", help="pass in limit as argument", type=str)
+    parser.add_argument("-P", "--profile", help="a Reddit.com profile to search", type=str)
+    parser.add_argument("-l", "--limit", help="limit the number of comments (default - 25)", type=str)
 
-    parser.add_argument("-up", "--upvote", help="upvote user posts", action="store_true")
-    parser.add_argument("-down", "--downvote", help="downvote user posts", action="store_true")
+    parser.add_argument("-up", "--upvote", help="upvote a profile's comments", action="store_true")
+    parser.add_argument("-down", "--downvote", help="downvote a profile's posts", action="store_true")
     
-    parser.add_argument("-v", "--version", help="get program version.", action="store_true")
+    parser.add_argument("-v", "--version", help="current RedditBot version.", action="store_true")
 
     args = parser.parse_args(argv)
     return args
