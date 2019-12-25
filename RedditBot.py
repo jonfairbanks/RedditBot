@@ -9,6 +9,7 @@ __version__ = '0.2.0'
 
 RED = str('\033[1;31;40m')
 GREEN = str('\033[1;32;40m')
+YELLOW = str('\033[1;33;40m')
 BLUE = str('\033[1;34;40m')
 GREY = str('\033[1;30;40m')
 RESET = str('\033[1;37;40m')
@@ -68,20 +69,30 @@ def login(args):
 
 def vote(reddit, args):
     counter = 0
+    success = 0
     profile = reddit.redditor(args.profile)
     limit = int(args.limit) if args.limit else int(25)
-    list = profile.comments.new(limit=limit)
-    for comment in list:
+    resp = list(profile.comments.new(limit=limit))
+    found = int(len(list(resp)))
+
+    if(found != limit):
+        print(YELLOW + "Found " + str(found) + " comments\n" + RESET)
+    
+    for comment in resp:
         counter += 1
-        print(BLUE + '[VOTING] ' + str(args.profile) + ' (' + str(counter) + ' / ' + str(limit) + ')\n' + RESET)
+        print(BLUE + '[VOTING] ' + str(args.profile) + ' (' + str(counter) + ' / ' + str(found) + ')\n' + RESET)
         print(str(comment.body) + '\n')
         print(GREY + '(r/' + str(comment.subreddit) + ')\n' + RESET)
         if args.downvote:
-            downvote(comment)
+            status = downvote(comment)
+            if(status == 0):
+                success += 1
         elif args.upvote:
-            upvote(comment)
+            status = upvote(comment)
+            if(status == 0):
+                success += 1
     label = str("Downvoted ") if args.downvote else str("Upvoted ")
-    print(GREEN + '[SUCCESS] ' + str(label) + str(counter) + ' of u/' + str(profile) + '\'s comments.\n' + RESET)
+    print(GREEN + '[SUCCESS] ' + str(label) + str(success) + ' of u/' + str(profile) + '\'s comments.\n' + RESET)
     return 0
 
 def downvote(comment):
@@ -91,7 +102,7 @@ def downvote(comment):
     except Exception as e:
         print(RED + str("Unable to downvote this comment\n") + RESET)
         #print(RED + str(e) + RESET)
-        return 0
+        return 1
 
 def upvote(comment):
     try:
@@ -100,7 +111,7 @@ def upvote(comment):
     except Exception as e:
         print(RED + str("Unable to upvote this comment\n") + RESET)
         #print(RED + str(e) + RESET)
-        return 0
+        return 1
 
 def main():
     """main func."""
