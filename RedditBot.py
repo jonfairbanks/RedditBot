@@ -8,6 +8,12 @@ import time
 
 __version__ = '0.2.0'
 
+RED = str('\033[1;31;40m')
+GREEN = str('\033[1;32;40m')
+BLUE = str('\033[1;34;40m')
+GREY = str('\033[0;37;40m')
+RESET = str('\033[1;37;40m')
+
 def id_generator(size = 16, chars = string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
 
@@ -57,8 +63,8 @@ def login(args):
         )
         return reddit
     except Exception as e:
-        print("\033[1;31;40mLogin Failed \033[1;37;40m")
-        print(e)
+        print(RED + "Login Failed" + RESET)
+        print(RED + str(e) + RESET)
         sys.exit(0)
 
 def vote(reddit, args):
@@ -67,17 +73,16 @@ def vote(reddit, args):
     limit = int(args.limit) if args.limit else int(25)
     list = profile.comments.new(limit=limit)
     for comment in list:
-        time.sleep(0.5)
         counter += 1
-        print('\033[1;34;40m[VOTING] ' + str(args.profile) + ' (' + str(counter) + ' / ' + str(limit) + ')\033[1;37;40m \n')
+        print(BLUE + '[VOTING] ' + str(args.profile) + ' (' + str(counter) + ' / ' + str(limit) + ')\n' + RESET)
         print(str(comment.body) + '\n')
-        print('(r/' + str(comment.subreddit) + ')\n')
+        print(GREY + '(r/' + str(comment.subreddit) + ')\n' + RESET)
         if args.downvote:
             downvote(comment)
         elif args.upvote:
             upvote(comment)
     label = str("Downvoted ") if args.downvote else str("Upvoted ")
-    print ('\033[1;32;40m[SUCCESS] ' + str(label) + str(counter) + ' of u/' + str(profile) + '\'s comments. \033[1;37;40m \n')
+    print(GREEN + '[SUCCESS] ' + str(label) + str(counter) + ' of u/' + str(profile) + '\'s comments.\n' + RESET)
     return 0
 
 def main():
@@ -95,7 +100,7 @@ def main():
         reddit = login(args=args)
         vote(reddit, args)
     else:
-        print("\033[1;31;40mYou'll need to pass a client-id (-c), client-secret (-s), username (-u), password (-p) and profile (-P).\033[1;37;40m")
+        print(RED + "You'll need to pass a client-id (-c), client-secret (-s), username (-u), password (-p) and profile (-P)." + RESET)
 
     sys.exit(0)
 
