@@ -69,13 +69,15 @@ def vote(reddit, args):
     for comment in list:
         time.sleep(0.5)
         counter += 1
-        print('\033[1;34;40m[VOTING] ' + str(args.profile) + ' (' + str(counter) + ' / ' + str(limit) + ')\033[1;37;40m \n' + str(comment.body) + ' (/r/' + str(comment.subreddit) + ')\n')
+        print('\033[1;34;40m[VOTING] ' + str(args.profile) + ' (' + str(counter) + ' / ' + str(limit) + ')\033[1;37;40m \n')
+        print(str(comment.body) + '\n')
+        print('(r/' + str(comment.subreddit) + ')\n')
         if args.downvote:
-            comment.downvote()
+            downvote(comment)
         elif args.upvote:
-            comment.upvote()
+            upvote(comment)
     label = str("Downvoted ") if args.downvote else str("Upvoted ")
-    print ('\033[1;32;40m[SUCCESS] ' + str(label) + str(counter) + ' of /u/' + str(profile) + '\'s comments. \033[1;37;40m \n')
+    print ('\033[1;32;40m[SUCCESS] ' + str(label) + str(counter) + ' of u/' + str(profile) + '\'s comments. \033[1;37;40m \n')
     return 0
 
 def main():
