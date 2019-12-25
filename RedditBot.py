@@ -25,7 +25,7 @@ def get_args(argv):
         argparse.Namespace: Parsed arguments.
     """
     parser = argparse.ArgumentParser(
-        description=("Upvote or downvote a profile's Reddit comment(s)")
+        description=("Upvote or downvote a Reddit profile's comment(s)")
     )
 
     parser.add_argument("-c", "--client-id", help="your Reddit.com app client-id", type=str)
