@@ -63,8 +63,8 @@ def login(args):
         )
         return reddit
     except Exception as e:
-        print(RED + "Login Failed" + RESET)
-        print(RED + str(e) + RESET)
+        print(RED + "Login Failed\n" + RESET)
+        #print(RED + str(e) + RESET)
         sys.exit(0)
 
 def vote(reddit, args):
@@ -85,6 +85,24 @@ def vote(reddit, args):
     print(GREEN + '[SUCCESS] ' + str(label) + str(counter) + ' of u/' + str(profile) + '\'s comments.\n' + RESET)
     return 0
 
+def downvote(comment):
+    try:
+        comment.downvote()
+        return 0
+    except Exception as e:
+        print(RED + str("Unable to downvote this comment\n") + RESET)
+        #print(RED + str(e) + RESET)
+        return 0
+
+def upvote(comment):
+    try:
+        comment.upvote()
+        return 0
+    except Exception as e:
+        print(RED + str("Unable to upvote this comment\n") + RESET)
+        #print(RED + str(e) + RESET)
+        return 0
+
 def main():
     """main func."""
     args = get_args(sys.argv[1:])
@@ -100,7 +118,7 @@ def main():
         reddit = login(args=args)
         vote(reddit, args)
     else:
-        print(RED + "You'll need to pass a client-id (-c), client-secret (-s), username (-u), password (-p) and profile (-P)." + RESET)
+        print(RED + "You'll need to pass a client-id (-c), client-secret (-s), username (-u), password (-p) and profile (-P) to begin." + RESET)
 
     sys.exit(0)
 
