@@ -50,7 +50,7 @@ def login(args):
     Args:
         args (argparse.Namespace): Parsed arguments.
 
-    Returns: a logged on praw instance
+    Returns: a logged in Reddit instance
     """
 
     try:
